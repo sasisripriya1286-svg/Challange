@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Dustbin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        .card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 15px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+        }
+        .card h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .status-bar {
+            height: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .full {
+            background-color: #e74c3c;
+        }
+        .half-full {
+            background-color: #f39c12;
+        }
+        .empty {
+            background-color: #2ecc71;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Smart Dustbin Dashboard</h1>
+        <p>Monitor your dustbin's status in real-time.</p>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Dustbin 1</h2>
+            <p id="status1">Status: Empty</p>
+            <div id="status-bar1" class="status-bar empty"></div>
+            <p id="last-empty1">Last Emptied: N/A</p>
+            <button onclick="updateStatus(1)">Update Status</button>
+        </div>
+        <div class="card">
+            <h2>Dustbin 2</h2>
+            <p id="status2">Status: Empty</p>
+            <div id="status-bar2" class="status-bar empty"></div>
+            <p id="last-empty2">Last Emptied: N/A</p>
+            <button onclick="updateStatus(2)">Update Status</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Smart Dustbin Inc.</p>
+    </div>
+
+    <script>
+        // Simulating the update process (you can replace with real sensor data/API calls)
+        function updateStatus(dustbinId) {
+            let status, barColor, lastEmptied;
+
+            // Generate random fullness level for demo
+            const fullness = Math.floor(Math.random() * 101); // 0 to 100%
+
+            if (fullness === 0) {
+                status = "Empty";
+                barColor = "empty";
+            } else if (fullness > 0 && fullness <= 50) {
+                status = "Half Full";
+                barColor = "half-full";
+            } else {
+                status = "Full";
+                barColor = "full";
+            }
+
+            lastEmptied = new Date().toLocaleString();
+
+            // Update the dashboard
+            document.getElementById(`status${dustbinId}`).textContent = `Status: ${status}`;
+            document.getElementById(`status-bar${dustbinId}`).className = `status-bar ${barColor}`;
+            document.getElementById(`last-empty${dustbinId}`).textContent = `Last Emptied: ${lastEmptied}`;
+        }
+    </script>
+</body>
+</html>
